@@ -1,0 +1,38 @@
+kind: Pod
+metadata:
+  name: ci-init
+apiVersion: v1
+spec:
+  containers:
+    - name: json-schema-validator
+      image: 3scale/ajv
+      command:
+        - sleep
+      args:
+        - infinity
+      tty: true
+      workingDir: "/home/jenkins/agent"
+      securityContext:
+        runAsUser: 1000
+    - name: envsubst
+      #image: mikefarah/yq
+      image: dibi/envsubst
+      command:
+        - sleep
+      args:
+        - infinity
+      tty: true
+      workingDir: "/home/jenkins/agent"
+      securityContext:
+        runAsUser: 1000
+    - name: yq
+      image: caternberg/curl-yq-jq-git:1.3
+      #image: mikefarah/yq
+      command:
+        - sleep
+      args:
+        - infinity
+      tty: true
+      workingDir: "/home/jenkins/agent"
+      securityContext:
+        runAsUser: 1000
